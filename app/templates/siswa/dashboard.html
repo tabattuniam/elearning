@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Dashboard Siswa{% endblock %}
+{% block content %}
+<div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-bold">Mata Pelajaran Saya</h1>
+    <a href="/siswa/nilai" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 text-sm">📊 Lihat Nilai</a>
+</div>
+{% if enrollments %}
+<div class="grid gap-4">
+    {% for e in enrollments %}
+    <a href="/siswa/mapel/{{ e.mapel.id }}" class="block bg-white rounded-xl shadow p-5 hover:shadow-md transition">
+        <h2 class="font-semibold text-lg">{{ e.mapel.nama }}</h2>
+        <p class="text-gray-500 text-sm mt-0.5">{{ e.mapel.deskripsi or "Tidak ada deskripsi" }}</p>
+        <div class="text-xs text-gray-400 mt-2">
+            Guru: {{ e.mapel.guru.nama }} ·
+            {{ e.mapel.materi_list|length }} materi ·
+            {{ e.mapel.kuis_list|length }} kuis
+        </div>
+    </a>
+    {% endfor %}
+</div>
+{% else %}
+<div class="bg-white rounded-xl shadow p-12 text-center text-gray-400">
+    <div class="text-5xl mb-3">📚</div>
+    <p>Anda belum terdaftar di kelas manapun.<br>Minta guru untuk mendaftarkan Anda.</p>
+</div>
+{% endif %}
+{% endblock %}

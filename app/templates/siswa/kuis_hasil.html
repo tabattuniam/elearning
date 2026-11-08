@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Hasil Kuis{% endblock %}
+{% block content %}
+<div class="max-w-md mx-auto text-center">
+    <div class="bg-white rounded-2xl shadow p-10 mt-10">
+        <div class="text-6xl mb-4">{% if hasil.nilai >= 75 %}🎉{% else %}📖{% endif %}</div>
+        <h1 class="text-2xl font-bold mb-1">{{ kuis.judul }}</h1>
+        <p class="text-gray-500 mb-6">Hasil kuis Anda</p>
+        <div class="text-6xl font-bold mb-2 {% if hasil.nilai >= 75 %}text-green-500{% else %}text-red-500{% endif %}">
+            {{ "%.0f"|format(hasil.nilai) }}
+        </div>
+        <p class="text-gray-400 text-sm mb-6">
+            {% if hasil.nilai >= 75 %}Bagus! Anda lulus kuis ini.{% else %}Pelajari lagi materinya ya.{% endif %}
+        </p>
+        <a href="/siswa/mapel/{{ kuis.mapel_id }}" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+            ← Kembali ke Mapel
+        </a>
+    </div>
+</div>
+{% endblock %}

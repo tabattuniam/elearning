@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}{{ mapel.nama }}{% endblock %}
+{% block content %}
+<div class="mb-4">
+    <a href="/guru" class="text-blue-600 hover:underline text-sm">← Kembali</a>
+</div>
+<h1 class="text-2xl font-bold mb-1">{{ mapel.nama }}</h1>
+<p class="text-gray-500 mb-6">{{ mapel.deskripsi }}</p>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- MATERI -->
+    <div class="bg-white rounded-xl shadow p-5">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="font-semibold text-lg">📄 Materi</h2>
+            <a href="/guru/mapel/{{ mapel.id }}/materi/tambah" class="bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">+ Tambah</a>
+        </div>
+        {% if mapel.materi_list %}
+        <ul class="space-y-2">
+            {% for m in mapel.materi_list|sort(attribute='urutan') %}
+            <li class="flex justify-between items-center py-2 border-b last:border-0">
+                <span class="text-sm">{{ m.urutan }}. {{ m.judul }}</span>
+                <a href="/guru/mapel/{{ mapel.id }}/materi/{{ m.id }}/hapus"
+                   onclick="return confirm('Hapus materi ini?')"
+                   class="text-red-400 hover:text-red-600 text-xs">Hapus</a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="text-gray-400 text-sm">Belum ada materi</p>
+        {% endif %}
+    </div>
+
+    <!-- KUIS -->
+    <div class="bg-white rounded-xl shadow p-5">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="font-semibold text-lg">📝 Kuis</h2>
+            <a href="/guru/mapel/{{ mapel.id }}/kuis/tambah" class="bg-green-600 text-white px-3 py-1 rounded text-sm hover:bg-green-700">+ Tambah</a>
+        </div>
+        {% if mapel.kuis_list %}
+        <ul class="space-y-2">
+            {% for k in mapel.kuis_list %}
+            <li class="flex justify-between items-center py-2 border-b last:border-0">
+                <span class="text-sm">{{ k.judul }} <span class="text-gray-400">({{ k.soal_list|length }} soal)</span></span>
+                <div class="flex gap-2">
+                    <a href="/guru/kuis/{{ k.id }}/soal" class="text-blue-500 hover:underline text-xs">Edit Soal</a>
+                    <a href="/guru/kuis/{{ k.id }}/hasil" class="text-green-500 hover:underline text-xs">Nilai</a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="text-gray-400 text-sm">Belum ada kuis</p>
+        {% endif %}
+    </div>
+</div>
+
+<!-- DAFTAR SISWA -->
+<div class="bg-white rounded-xl shadow p-5 mt-6">
+    <h2 class="font-semibold text-lg mb-4">👥 Siswa Terdaftar</h2>
+    <form method="post" action="/guru/mapel/{{ mapel.id }}/enroll" class="flex gap-2 mb-4">
+        <input type="text" name="username_siswa" placeholder="Username siswa" required
+            class="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none flex-1">
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700">+ Daftarkan</button>
+    </form>
+    {% if enrollments %}
+    <ul class="space-y-1">
+        {% for e in enrollments %}
+        <li class="text-sm py-1 border-b last:border-0 text-gray-700">{{ e.siswa.nama }} <span class="text-gray-400">({{ e.siswa.username }})</span></li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p class="text-gray-400 text-sm">Belum ada siswa terdaftar</p>
+    {% endif %}
+</div>
+{% endblock %}

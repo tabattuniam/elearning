@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Tambah Mata Pelajaran{% endblock %}
+{% block content %}
+<div class="max-w-md mx-auto">
+    <h1 class="text-2xl font-bold mb-6">Tambah Mata Pelajaran</h1>
+    <div class="bg-white rounded-xl shadow p-6">
+        <form method="post" action="/guru/mapel/tambah" class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium mb-1">Nama Mata Pelajaran</label>
+                <input type="text" name="nama" required class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none" placeholder="cth: Jaringan Komputer Dasar">
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-1">Deskripsi</label>
+                <textarea name="deskripsi" rows="3" class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none" placeholder="Deskripsi singkat..."></textarea>
+            </div>
+            <div class="flex gap-3 pt-2">
+                <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">Simpan</button>
+                <a href="/guru" class="text-gray-500 px-4 py-2 rounded-lg hover:bg-gray-100">Batal</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

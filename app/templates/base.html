@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}E-Learning SMK{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+{% if user is defined and user %}
+<nav class="bg-blue-700 text-white px-6 py-3 flex justify-between items-center shadow">
+    <div class="font-bold text-lg">📚 E-Learning SMK</div>
+    <div class="flex items-center gap-4 text-sm">
+        <span>👤 {{ user.nama }} <span class="bg-blue-500 px-2 py-0.5 rounded text-xs">{{ user.role }}</span></span>
+        <a href="/logout" class="bg-red-500 hover:bg-red-600 px-3 py-1 rounded">Keluar</a>
+    </div>
+</nav>
+{% endif %}
+
+<div class="max-w-5xl mx-auto p-6">
+    {% block content %}{% endblock %}
+</div>
+
+</body>
+</html>

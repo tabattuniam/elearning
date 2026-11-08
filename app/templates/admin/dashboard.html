@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block content %}
+<h1 class="text-2xl font-bold mb-6">Dashboard Admin</h1>
+<div class="grid grid-cols-2 gap-4 mb-8">
+    <div class="bg-white rounded-xl p-6 shadow text-center">
+        <div class="text-4xl font-bold text-blue-600">{{ total_guru }}</div>
+        <div class="text-gray-500 mt-1">Guru</div>
+    </div>
+    <div class="bg-white rounded-xl p-6 shadow text-center">
+        <div class="text-4xl font-bold text-green-600">{{ total_siswa }}</div>
+        <div class="text-gray-500 mt-1">Siswa</div>
+    </div>
+</div>
+<div class="bg-white rounded-xl p-6 shadow">
+    <h2 class="font-semibold text-lg mb-4">Menu Admin</h2>
+    <div class="flex gap-3">
+        <a href="/admin/users" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Kelola User</a>
+        <a href="/admin/users/tambah" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">+ Tambah User</a>
+    </div>
+</div>
+{% endblock %}
